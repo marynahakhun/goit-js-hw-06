@@ -1,29 +1,23 @@
-const refs ={
-     form : document.querySelector('.login-form'),
-     inputEmail: document.querySelector('input[type="email"]'),
-     inputPassword: document.querySelector('input[type="password"]')
-}
 
+const loginForm = document.querySelector('form.login-form');
 
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault(); 
 
-refs.form.addEventListener('submit', submitResult)
+  const emailInput = loginForm.elements.email;
+  const passwordInput = loginForm.elements.password;
 
-function submitResult(event) {
-    event.preventDefault()
-
-  const formData = new FormData(event.currentTarget)
-  formData.forEach((value, name )=>{
-    if (!formData.get('email') || !formData.get('password')) {
-        window.alert('Всі поля повинні бути заповнені');
-        
-        return ;
-      }
-      
-    
-    event.currentTarget.reset()
-  });
-  const userData = {
-    email: formData.get('email'),
-password: formData.get('password')
+  if (!emailInput.value || !passwordInput.value) {
+    alert('Будь ласка, заповніть всі поля форми!');
+    return; // Перервати подальше виконання скрипту
   }
-}
+
+  const loginData = {
+    email: emailInput.value,
+    password: passwordInput.value,
+  };
+
+  console.log(loginData);
+
+  loginForm.reset();
+});
